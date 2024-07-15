@@ -9,18 +9,13 @@ const submit = document.getElementById('submit');
 const studcardDisplay = document.getElementById('studcard');
 
 
-
 let userArray = [];
 let isEdit = false;
 let index;
 
 
+let objStr = localStorage.getItem('users'); 
 
-
-// Local storage me aaya hua data .. firse form me jayega and baad me vapas niche card me Display hoga.
-let objStr = localStorage.getItem('users'); // -> yeh vala Data(Object) String me aayega.
-
-// Upar vala 'objStr' - ka data string me aa raha tha .. usko vapas niche object me laayenge. .... and 'userArray' name ke main function me store kar denge.
 if (objStr != null) {
 
     userArray = JSON.parse(objStr);
@@ -29,13 +24,9 @@ if (objStr != null) {
 
 DisplayInfo();
 
-// Submit button ke upar Click event kari hai.
 submit.onclick = () => {
 
-    // Isse page refresh nahi hota.
     event.preventDefault();
-
-
 
     const studfname = fname.value;
     const studlname = lname.value;
@@ -58,7 +49,6 @@ submit.onclick = () => {
 
     } else {
 
-        // PUSH method se - 1 array data ke saath piche se dusra array (Means data) ADD ho jayega.
         userArray.push(
             {
                 fname: studfname,
@@ -75,9 +65,6 @@ submit.onclick = () => {
 
     }
 
-
-
-
     fname.value = '';
     lname.value = '';
     age.value = '';
@@ -92,17 +79,13 @@ submit.onclick = () => {
 
 
 
-// Data save karne ke liye.
 function SaveInfo(userArray) {
 
-    // Array(Object) Format ko String format me change karta hai.
     let str = JSON.stringify(userArray);
     localStorage.setItem('users', str);
 }
 
 
-
-// Data display karne ke liye.
 function DisplayInfo() {
     let statement = '';
 
@@ -147,7 +130,6 @@ function DisplayInfo() {
 }
 
 
-// Data edit karne ke liye.
 function EditInfo(id) {
 
     let user = userArray[id];
@@ -167,9 +149,7 @@ function EditInfo(id) {
 }
 
 
-// Data delete karne ke liye.
 function DeleteInfo(id) {
-    // 1 card delete karne ke liye.
     userArray.splice(id, 1);
     SaveInfo(userArray);
     DisplayInfo();
